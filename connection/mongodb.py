@@ -1,5 +1,5 @@
 from pymongo import MongoClient
-
+from services.mongo_services.mongo_service import mongoService
 
 class MongoConnection:
     __instance = None
@@ -11,15 +11,9 @@ class MongoConnection:
 
     def connect(self):
         self.__client = MongoClient("mongodb://localhost:27017/")
-        self.__db = self.__client["allData"]
-
-    @property
-    def client(self):
-        return self.__client    
-    
-    @property
-    def db(self):
-        return self.__db    
+        self.__db = self.__client["fastAPI_Tic-Tac-Tie"]
+        # self.__db = self.__client["allData"].users.insert_one()
+        mongoService.mongoCommondsInit(self.__client,self.__db)  
 
 
 mongoConnection = MongoConnection()

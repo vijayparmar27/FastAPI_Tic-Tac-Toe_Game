@@ -1,13 +1,27 @@
-from fastapi import APIRouter, Request
-from models.user_model import SignupRequest
-from connection.mongodb import mongoConnection
+from fastapi import APIRouter, Request, Header, Depends
+from models.user_model import SignupRequest, LoginRequest
+from controllers.user_controller import signupController, loginController
+from utils.token import Token
 
 router = APIRouter(
-    tags=["User"]    
+    tags=["User"]
 )
 
-# def index(request: SignupRequest):
+
 @router.post("/signup")
-def index(request: SignupRequest):
-    print("signup :: request :: ", dict(request))
-    return "........!!!!???"
+async def signupReq(request: SignupRequest):
+    data = await signupController(request)
+    return data
+
+
+@router.post("/login")
+async def loginReq(request: LoginRequest):
+    data = await loginController(request)
+    return data
+
+
+@router.get("/users", dependencies=[Depends(Token.verify_token)])
+def users(request: Request):
+    print("request :: ", request.state.payload)
+    return "...."
+
