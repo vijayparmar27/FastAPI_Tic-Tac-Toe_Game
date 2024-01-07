@@ -10,6 +10,9 @@ pymongo = "*"
 bcrypt = "==4.1.2"
 passlib = {extras = ["bcrypt"], version = "*"}
 python-jose = {extras = ["cryptography"], version = "*"}
+python-socketio = "*"
+redis = "*"
+python-dotenv = "*"
 
 [dev-packages]
 

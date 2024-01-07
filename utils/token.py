@@ -29,3 +29,10 @@ class Token:
             raise credentials_exception
         request.state.payload = payload
         return request
+    
+    def verify_token_for_event(token:str):
+         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+         id: str = payload.get("_id")
+         if id is None:
+            return False
+         return True

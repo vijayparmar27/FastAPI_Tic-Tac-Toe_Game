@@ -9,6 +9,10 @@ class SignupRequest(BaseModel):
     password: str | None = None
     confPassword: str | None = None
 
+
 class LoginRequest(BaseModel):
-    uniqueId : str | None = None
-    password : str | None = None
+    uniqueId: str | None = None
+    password: str | None = None
+
+
+
